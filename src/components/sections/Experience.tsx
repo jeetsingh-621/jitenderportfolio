@@ -63,7 +63,7 @@ export default function Experience() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} className="flex items-center gap-4 mb-10">
-          <span className="font-mono text-[10px] tracking-[4px] uppercase text-neon-green/60">03. Archive</span>
+          <span className="font-mono text-[12px] tracking-[4px] uppercase text-neon-green/60">03. Archive</span>
           <div className="flex-1 h-px bg-neon-green/10" />
         </motion.div>
 
@@ -135,7 +135,7 @@ function ExperienceCard({ exp, align }: { exp: any; align: 'left' | 'right' }) {
           
           <div className="flex flex-col sm:flex-row items-start justify-between gap-4 mb-10 relative z-10">
             <div>
-              <div className="font-mono text-[9px] tracking-[4px] uppercase mb-4 flex items-center gap-2" style={{ color: exp.color }}>
+              <div className="font-mono text-[11px] md:text-[12px] tracking-[4px] uppercase mb-4 flex items-center gap-2" style={{ color: exp.color }}>
                 <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: exp.color }} />
                 {exp.type}
               </div>
@@ -146,7 +146,7 @@ function ExperienceCard({ exp, align }: { exp: any; align: 'left' | 'right' }) {
             </div>
           </div>
 
-          <div className="font-mono text-[10px] md:text-[11px] text-white/20 uppercase tracking-[2px] mb-8 bg-white/[0.03] w-fit px-4 py-1.5 rounded-sm border border-white/5">
+          <div className="font-mono text-[11px] md:text-[12px] text-white/20 uppercase tracking-[2px] mb-8 bg-white/[0.03] w-fit px-4 py-1.5 rounded-sm border border-white/5">
             {exp.period}
           </div>
 
@@ -162,8 +162,8 @@ function ExperienceCard({ exp, align }: { exp: any; align: 'left' | 'right' }) {
           {exp.projects.length > 0 && (
             <div className="pt-8 border-t border-white/5 flex flex-wrap gap-4">
                {exp.projects.map((p: string) => (
-                 <a key={p} href={p.split(" — ")[1]} target="_blank" rel="noreferrer" className="flex items-center gap-2 font-mono text-[9px] tracking-[2px] text-white/30 hover:text-neon-green transition-colors border border-white/5 hover:border-neon-green/30 px-3 py-2 rounded-sm bg-white/[0.01]">
-                   {p.split(" — ")[0]} <span className="text-[10px] opacity-40">↗</span>
+                 <a key={p} href={p.split(" — ")[1]} target="_blank" rel="noreferrer" className="flex items-center gap-2 font-mono text-[11px] md:text-[12px] tracking-[2px] text-white/30 hover:text-neon-green transition-colors border border-white/5 hover:border-neon-green/30 px-3 py-2 rounded-sm bg-white/[0.01]">
+                   {p.split(" — ")[0]} <span className="text-[12px] opacity-40">↗</span>
                  </a>
                ))}
             </div>

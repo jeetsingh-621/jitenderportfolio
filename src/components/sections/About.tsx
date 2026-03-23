@@ -67,7 +67,7 @@ export default function About() {
         >
           <motion.span
             variants={itemVariants}
-            className="font-mono text-[9px] md:text-[11px] tracking-[4px] uppercase text-neon-green/70"
+            className="font-mono text-[11px] md:text-[12px] tracking-[4px] uppercase text-neon-green/70"
           >
             01. About
           </motion.span>
@@ -134,7 +134,7 @@ export default function About() {
                   key={item.label}
                   className="p-3 md:p-4 border border-white/5 hover:border-neon-green/20 transition-colors bg-white/[0.01]"
                 >
-                  <div className="font-mono text-[8px] md:text-[10px] tracking-[2px] md:tracking-[3px] uppercase text-white/30 mb-1">
+                  <div className="font-mono text-[10px] md:text-[12px] tracking-[2px] md:tracking-[3px] uppercase text-white/30 mb-1">
                     {item.label}
                   </div>
                   <div className="font-body text-white/80 text-xs md:text-sm truncate">
@@ -164,7 +164,7 @@ export default function About() {
                     <span className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-red-500/60" />
                     <span className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-yellow-500/60" />
                     <span className="w-2 md:w-3 h-2 md:h-3 rounded-full bg-neon-green/60" />
-                    <span className="ml-2 md:ml-4 text-white/20 text-[10px] tracking-widest uppercase">
+                    <span className="ml-2 md:ml-4 text-white/20 text-[11px] md:text-[12px] tracking-widest uppercase">
                       developer.js
                     </span>
                   </div>
@@ -227,7 +227,7 @@ export default function About() {
               transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
               className="absolute -bottom-4 md:-bottom-6 -right-2 md:-right-6 px-3 md:px-4 py-1.5 md:py-2 bg-dark-3 border border-neon-blue/30 shadow-neon-blue z-10"
             >
-              <span className="font-mono text-[8px] md:text-[10px] tracking-[2px] md:tracking-[3px] uppercase text-neon-blue">
+              <span className="font-mono text-[10px] md:text-[12px] tracking-[2px] md:tracking-[3px] uppercase text-neon-blue">
                 React Expert
               </span>
             </motion.div>

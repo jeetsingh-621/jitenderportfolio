@@ -98,7 +98,6 @@ const skillCategories = [
 export default function Skills() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const containerRef = useRef<HTMLElement>(null);
-  const isMobileSize = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -110,7 +109,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={containerRef}
-      className="relative min-h-[100vh] py-16 bg-[#050505] overflow-hidden flex flex-col justify-center"
+      className="relative min-h-[100vh] py-24 bg-[#050505] overflow-hidden flex flex-col justify-center"
     >
       {/* Background Cyber-Matrix Effect */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
@@ -128,11 +127,13 @@ export default function Skills() {
         {/* Cinematic Header */}
         <div className="text-center mb-24">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+            className="opacity-0"
           >
-            <span className="font-mono text-[10px] tracking-[8px] uppercase text-neon-green/60 mb-6 block">
+            <span className="font-mono text-[11px] md:text-[12px] tracking-[6px] md:tracking-[8px] uppercase text-neon-green/60 mb-6 block">
               Command Center
             </span>
             <h2 className="font-display text-[clamp(3.5rem,15vw,10rem)] text-white leading-[0.8] uppercase tracking-tighter">
@@ -160,12 +161,12 @@ export default function Skills() {
         <motion.div
           animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ repeat: Infinity, duration: 4 }}
-          className="mt-10 md:mt-20 text-center"
+          className="mt-20 text-center"
         >
-          <div className="font-mono text-[16px] tracking-[4px] text-white/70 uppercase flex items-center justify-center gap-4">
-            <span className="w-12 h-px bg-white/10" />
+          <div className="font-mono text-[10px] md:text-[12px] tracking-[4px] text-white uppercase flex items-center justify-center gap-4">
+            <span className="w-12 h-px bg-white/40" />
             Hover modules to deploy sub-routines
-            <span className="w-12 h-px bg-white/10" />
+            <span className="w-12 h-px bg-white/40" />
           </div>
         </motion.div>
       </div>
@@ -183,6 +184,8 @@ function SkillModule({
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
+  const isActive = activeCategory === category.id;
+
   // Spotlight effect positioning
   const spotlightX = useSpring(mouseX, { stiffness: 50, damping: 20 });
   const spotlightY = useSpring(mouseY, { stiffness: 50, damping: 20 });
@@ -197,11 +200,10 @@ function SkillModule({
     damping: 20,
   });
 
-  // Spotlight background animation value (Always called at top level)
   const spotlightBackground = useTransform(
     [mouseX, mouseY],
     ([x, y]: any) =>
-      `radial-gradient(circle at ${(x + 0.5) * 100}% ${(y + 0.5) * 100}%, ${category.color}40 0%, transparent 70%)`,
+      `radial-gradient(circle at ${(x + 0.5) * 100}% ${(y + 0.5) * 100}%, ${category.color}40 0%, transparent 70%)`
   );
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
@@ -212,7 +214,6 @@ function SkillModule({
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // For Tilt
     mouseX.set(x / width - 0.5);
     mouseY.set(y / height - 0.5);
   }
@@ -234,14 +235,15 @@ function SkillModule({
       {/* Module Base with 3D Tilt & Spotlight */}
       <motion.div
         style={{ rotateX, rotateY }}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: idx * 0.1 }}
-        className={`group relative p-12 border border-white/10 bg-white/[0.01] overflow-hidden flex flex-col items-center gap-6 min-h-[300px] justify-center transition-colors duration-500
-          ${activeCategory === category.id ? "border-white/20 scale-[1.02]" : ""}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1, delay: idx * 0.1, ease: "easeOut" }}
+        className={`group relative p-12 border border-white/10 bg-white/[0.01] overflow-hidden flex flex-col items-center gap-6 min-h-[300px] justify-center cursor-pointer md:cursor-default opacity-0
+          ${isActive ? "border-white/20 scale-[1.02] bg-white/[0.03]" : ""}
         `}
       >
-        {/* Radial Spotlight Follower - Disabled on Mobile for performance */}
+        {/* Radial Spotlight Follower */}
         {!isMobileSize && (
           <motion.div
             className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-30 transition-opacity duration-500"
@@ -253,12 +255,16 @@ function SkillModule({
 
         {/* Animated Border Beam */}
         <AnimatePresence>
-          {activeCategory === category.id && (
+          {isActive && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 pointer-events-none"
+              transition={{
+                duration: 1.2,
+                delay: 0.4,
+                ease: "easeOut",
+              }}
+              className="absolute inset-0 pointer-events-none opacity-0"
             >
               <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent animate-border-flow-x" />
               <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/50 to-transparent animate-border-flow-x-reverse" />
@@ -270,22 +276,22 @@ function SkillModule({
 
         {/* Visual Accent Top Bar */}
         <div
-          className={`absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-current to-transparent opacity-30 transition-all duration-500 ${activeCategory === category.id ? "opacity-100 scale-x-110" : ""}`}
+          className={`absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-current to-transparent opacity-30 transition-all duration-500 ${isActive ? "opacity-100 scale-x-110" : ""}`}
           style={{ color: category.color }}
         />
 
         {/* Icon Container with Glitch */}
         <div className="relative">
           <motion.div
-            animate={activeCategory === category.id ? { y: [0, -5, 0] } : {}}
+            animate={isActive ? { y: [0, -5, 0] } : {}}
             className="text-white group-hover:text-neon-green transition-colors duration-500 relative z-10"
             style={{
-              color: activeCategory === category.id ? category.color : "",
+              color: isActive ? category.color : "",
             }}
           >
             {category.icon}
           </motion.div>
-          {activeCategory === category.id && (
+          {isActive && (
             <motion.div
               layoutId="glow"
               className="absolute inset-0 blur-2xl opacity-50"
@@ -298,8 +304,8 @@ function SkillModule({
           <h3 className="font-display text-3xl text-white uppercase tracking-tight mb-2">
             {category.title}
           </h3>
-          <span className="font-mono text-[9px] tracking-[2px] text-white/20 uppercase group-hover:text-white/40 transition-colors">
-            Initialize Module
+          <span className="font-mono text-[11px] md:text-[12px] tracking-[2px] text-white/20 uppercase group-hover:text-white/40 transition-colors">
+            {isActive ? "Module Deployed" : "Initialize Module"}
           </span>
         </div>
 
@@ -314,7 +320,7 @@ function SkillModule({
 
       {/* Exploration Overlay - Exploding Skills */}
       <AnimatePresence>
-        {activeCategory === category.id && (
+        {isActive && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
@@ -337,7 +343,7 @@ function SkillModule({
                   className="text-xl"
                   style={{ color: skill.color }}
                 />
-                <span className="font-mono text-[10px] text-white uppercase tracking-wider whitespace-nowrap">
+                <span className="font-mono text-[11px] md:text-[12px] text-white uppercase tracking-wider whitespace-nowrap">
                   {skill.name}
                 </span>
               </motion.div>
@@ -348,33 +354,17 @@ function SkillModule({
 
       <style jsx global>{`
         @keyframes border-flow-x {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
         }
         @keyframes border-flow-y {
-          0% {
-            transform: translateY(-100%);
-          }
-          100% {
-            transform: translateY(100%);
-          }
+          0% { transform: translateY(-100%); }
+          100% { transform: translateY(100%); }
         }
-        .animate-border-flow-x {
-          animation: border-flow-x 2s infinite linear;
-        }
-        .animate-border-flow-x-reverse {
-          animation: border-flow-x 2s infinite linear reverse;
-        }
-        .animate-border-flow-y {
-          animation: border-flow-y 2s infinite linear;
-        }
-        .animate-border-flow-y-reverse {
-          animation: border-flow-y 2s infinite linear reverse;
-        }
+        .animate-border-flow-x { animation: border-flow-x 2s infinite linear; }
+        .animate-border-flow-x-reverse { animation: border-flow-x 2s infinite linear reverse; }
+        .animate-border-flow-y { animation: border-flow-y 2s infinite linear; }
+        .animate-border-flow-y-reverse { animation: border-flow-y 2s infinite linear reverse; }
       `}</style>
     </div>
   );

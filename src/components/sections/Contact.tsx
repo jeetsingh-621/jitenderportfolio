@@ -26,7 +26,7 @@ export default function Contact() {
           className="flex items-center justify-center gap-4 mb-12 md:mb-16"
         >
           <div className="w-8 md:w-16 h-px bg-neon-green/10" />
-          <span className="font-mono text-[9px] md:text-[11px] tracking-[4px] uppercase text-neon-green/70">05. Contact</span>
+          <span className="font-mono text-[11px] md:text-[12px] tracking-[4px] uppercase text-neon-green/70">05. Contact</span>
           <div className="w-8 md:w-16 h-px bg-neon-green/10" />
         </motion.div>
 
@@ -59,14 +59,14 @@ export default function Contact() {
         >
           <a
             href="mailto:jeetsinghjeet68@gmail.com"
-            className="group relative inline-flex items-center justify-center gap-3 px-8 md:px-10 py-4 md:py-5 font-mono text-[10px] md:text-[12px] tracking-[3px] uppercase text-dark bg-neon-green hover:bg-transparent hover:text-neon-green border border-neon-green transition-all duration-300 hover:shadow-neon-green active:scale-95"
+            className="group relative inline-flex items-center justify-center gap-3 px-8 md:px-10 py-4 md:py-5 font-mono text-[11px] md:text-[12px] tracking-[3px] uppercase text-dark bg-neon-green hover:bg-transparent hover:text-neon-green border border-neon-green transition-all duration-300 hover:shadow-neon-green active:scale-95"
           >
             Say Hello →
           </a>
           <a
             href="https://linkedin.com/in/jeet-singh-aa11a9158"
             target="_blank"
-            className="inline-flex items-center justify-center gap-3 px-8 md:px-10 py-4 md:py-5 font-mono text-[10px] md:text-[12px] tracking-[3px] uppercase text-white/50 border border-white/10 hover:border-neon-blue/50 hover:text-neon-blue transition-all duration-300 active:scale-95"
+            className="inline-flex items-center justify-center gap-3 px-8 md:px-10 py-4 md:py-5 font-mono text-[11px] md:text-[12px] tracking-[3px] uppercase text-white/50 border border-white/10 hover:border-neon-blue/50 hover:text-neon-blue transition-all duration-300 active:scale-95"
           >
             LinkedIn ↗
           </a>
@@ -90,7 +90,7 @@ export default function Contact() {
               target="_blank"
               className="group block"
             >
-              <div className="font-mono text-[8px] md:text-[10px] tracking-[3px] uppercase text-white/20 mb-2">{item.label}</div>
+              <div className="font-mono text-[10px] md:text-[12px] tracking-[3px] uppercase text-white/20 mb-2">{item.label}</div>
               <div className="font-body text-white/60 group-hover:text-neon-green transition-colors text-sm md:text-base break-words md:break-normal truncate-xs">{item.value}</div>
             </a>
           ))}

@@ -157,7 +157,7 @@ export default function Hero() {
         transition={{ delay: 2 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
-        <span className="font-mono text-[10px] tracking-[3px] text-white/30 uppercase">
+        <span className="font-mono text-[11px] md:text-[12px] tracking-[3px] text-white/30 uppercase">
           Scroll
         </span>
         <motion.div
@@ -180,7 +180,7 @@ export default function Hero() {
                 className="flex items-center gap-2 px-3 py-1 border border-neon-green/20 bg-neon-green/5"
               >
                 <span className="w-2 h-2 rounded-full bg-neon-green animate-pulse" />
-                <span className="font-mono text-[9px] md:text-[11px] tracking-[2px] text-neon-green/80 uppercase">
+                <span className="font-mono text-[11px] md:text-[12px] tracking-[2px] text-neon-green/80 uppercase">
                   Available for work
                 </span>
               </motion.div>
@@ -192,21 +192,21 @@ export default function Hero() {
                 className="flex items-center gap-3"
               >
                 <span className="w-6 md:w-8 h-px bg-neon-green/30" />
-                <span className="font-mono text-[9px] md:text-[11px] tracking-[3px] md:tracking-[4px] uppercase text-white/40">
+                <span className="font-mono text-[11px] md:text-[12px] tracking-[3px] md:tracking-[4px] uppercase text-white/40">
                   Frontend Developer
                 </span>
               </motion.div>
             </div>
 
             <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{
-                duration: 0.8,
+                duration: 1.2,
                 delay: 0.4,
-                ease: [0.22, 1, 0.36, 1],
+                ease: "easeOut",
               }}
-              className="mb-2 md:mb-4"
+              className="mb-2 md:mb-4 opacity-0"
             >
               <h1
                 className="glitch-text font-display text-[clamp(2.5rem,14vw,9rem)] leading-[0.9] tracking-tight text-white select-none"
@@ -248,7 +248,7 @@ export default function Hero() {
             >
               <a
                 href="#projects"
-                className="group relative inline-flex items-center justify-center gap-3 px-6 md:px-8 py-3.5 md:py-4 font-mono text-[10px] md:text-[12px] tracking-[3px] uppercase text-dark bg-neon-green hover:bg-transparent hover:text-neon-green border border-neon-green transition-all duration-300 hover:shadow-neon-green overflow-hidden"
+                className="group relative inline-flex items-center justify-center gap-3 px-6 md:px-8 py-3.5 md:py-4 font-mono text-[11px] md:text-[12px] tracking-[3px] uppercase text-dark bg-neon-green hover:bg-transparent hover:text-neon-green border border-neon-green transition-all duration-300 hover:shadow-neon-green overflow-hidden"
               >
                 <span className="relative z-10">View Work</span>
                 <span className="relative z-10 group-hover:translate-x-1 transition-transform">
@@ -257,7 +257,7 @@ export default function Hero() {
               </a>
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center gap-3 px-6 md:px-8 py-3.5 md:py-4 font-mono text-[10px] md:text-[12px] tracking-[3px] uppercase text-white/60 border border-white/10 hover:border-neon-green/50 hover:text-neon-green transition-all duration-300"
+                className="group inline-flex items-center justify-center gap-3 px-6 md:px-8 py-3.5 md:py-4 font-mono text-[11px] md:text-[12px] tracking-[3px] uppercase text-white/60 border border-white/10 hover:border-neon-green/50 hover:text-neon-green transition-all duration-300"
               >
                 Let's Talk{" "}
                 <span className="group-hover:translate-x-1 transition-transform">
@@ -269,8 +269,9 @@ export default function Hero() {
             {/* Original Stats row */}
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.5 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 1.5 }}
               className="grid grid-cols-2 md:flex md:flex-wrap gap-x-8 gap-y-10 py-10 border-t border-white/5"
             >
               {[
@@ -283,7 +284,7 @@ export default function Hero() {
                   <div className="font-display text-3xl md:text-4xl text-neon-green text-glow-green">
                     {stat.value}
                   </div>
-                  <div className="font-mono text-[8px] md:text-[10px] tracking-[2px] md:tracking-[3px] uppercase text-white/30 mt-1">
+                  <div className="font-mono text-[11px] md:text-[12px] tracking-[2px] md:tracking-[3px] uppercase text-white/30 mt-1">
                     {stat.label}
                   </div>
                 </div>
@@ -292,7 +293,7 @@ export default function Hero() {
           </div>
 
           {/* Right Side: Professional 3D Digital HUD (Moving Thing) */}
-          <div className="order-2 lg:order-2 mt-10 flex justify-center lg:justify-end items-center relative py-12 lg:py-0">
+          <div className="order-2 lg:order-2 md:mt-10 flex justify-center lg:justify-end items-center relative py-12 lg:py-0">
             <motion.div
               style={{ rotateX, rotateY }}
               initial={{ opacity: 0, scale: 0.8 }}
@@ -403,7 +404,7 @@ export default function Hero() {
                 transition={{ delay: 1.5 }}
                 className="absolute -bottom-6 -left-6 bg-dark/80 border border-white/10 px-8 py-5 shadow-2xl backdrop-blur-xl z-20 border-l-neon-green border-l-2"
               >
-                <p className="font-mono text-[8px] tracking-[5px] text-neon-green uppercase mb-1 font-bold">
+                <p className="font-mono text-[11px] md:text-[12px] tracking-[5px] text-neon-green uppercase mb-1 font-bold">
                   System Status
                 </p>
                 <p className="font-display text-2xl text-white uppercase tracking-tighter">

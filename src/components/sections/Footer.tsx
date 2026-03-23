@@ -4,10 +4,10 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-4 text-center md:text-left">
         <div className="flex flex-col items-center md:items-start gap-2">
           <span className="font-display text-2xl tracking-widest text-neon-green/60 uppercase">JT_</span>
-          <p className="font-mono text-[9px] tracking-[2px] text-white/10 uppercase">Crafting premium web experiences</p>
+          <p className="font-mono text-[11px] md:text-[12px] tracking-[2px] text-white/10 uppercase">Crafting premium web experiences</p>
         </div>
         
-        <span className="font-mono text-[9px] md:text-[10px] tracking-[2px] md:tracking-[3px] text-white/20 uppercase order-3 md:order-2">
+        <span className="font-mono text-[11px] md:text-[12px] tracking-[2px] md:tracking-[3px] text-white/20 uppercase order-3 md:order-2">
           Built by Jitender © {new Date().getFullYear()}
         </span>
         
@@ -20,7 +20,7 @@ export default function Footer() {
               key={l.label}
               href={l.href}
               target="_blank"
-              className="font-mono text-[10px] tracking-[3px] uppercase text-white/30 hover:text-neon-green transition-all duration-300 border-b border-transparent hover:border-neon-green pb-1"
+              className="font-mono text-[11px] md:text-[12px] tracking-[3px] uppercase text-white/30 hover:text-neon-green transition-all duration-300 border-b border-transparent hover:border-neon-green pb-1"
             >
               {l.label}
             </a>

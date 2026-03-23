@@ -66,7 +66,7 @@ export default function Projects() {
            animate={isInView ? { opacity: 1 } : {}}
            className="flex items-center gap-4 mb-20"
         >
-           <span className="font-mono text-[9px] md:text-[11px] tracking-[4px] uppercase text-neon-green/70">
+           <span className="font-mono text-[11px] md:text-[12px] tracking-[4px] uppercase text-neon-green/70">
               04. Projects
            </span>
            <div className="flex-1 h-px bg-neon-green/10" />
@@ -83,7 +83,7 @@ export default function Projects() {
               <br />
               <span className="text-neon-green text-glow-green">WORKS</span>
            </motion.h2>
-           <p className="text-white/20 font-mono text-[10px] md:text-[11px] tracking-[2px] uppercase mb-4 max-w-xs text-left md:text-right hidden md:block">
+           <p className="text-white/20 font-mono text-[11px] md:text-[12px] tracking-[2px] uppercase mb-4 max-w-xs text-left md:text-right hidden md:block">
               CURATED COLLECTION OF DIGITAL PRODUCTS & HACKATHON PROJECTS
            </p>
         </div>
@@ -137,13 +137,13 @@ function ProjectCard({ project, index, total }: { project: any, index: number, t
       {/* Info Side - Interactive Text Glow & Alignments */}
       <div className="w-full lg:w-[42%] flex flex-col items-start relative lg:translate-y-0 group-hover:lg:-translate-y-4 transition-transform duration-500">
          {/* Record Label with pulsing line */}
-         <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-4 mb-6">
             <motion.div 
               animate={isItemInView ? { width: [40, 60, 40] } : {}}
               transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
               className="h-px bg-neon-green" 
             />
-            <span className="font-mono text-[10px] tracking-[6px] text-neon-green uppercase font-bold">
+            <span className="font-mono text-[11px] md:text-[12px] tracking-[6px] text-neon-green uppercase font-bold">
                RECORD_0{index + 1}
             </span>
          </div>
@@ -160,7 +160,7 @@ function ProjectCard({ project, index, total }: { project: any, index: number, t
          {/* Tech Tags */}
          <div className="flex flex-wrap gap-2 mb-12">
             {project.tech.map((t: string) => (
-              <span key={t} className="font-mono text-[9px] uppercase tracking-widest text-white/40 border border-white/10 px-4 py-2 rounded-lg bg-white/5 hover:border-neon-green/40 hover:text-neon-green transition-all">
+              <span key={t} className="font-mono text-[11px] md:text-[12px] uppercase tracking-widest text-white/40 border border-white/10 px-4 py-2 rounded-lg bg-white/5 hover:border-neon-green/40 hover:text-neon-green transition-all">
                  {t}
               </span>
             ))}
@@ -169,8 +169,8 @@ function ProjectCard({ project, index, total }: { project: any, index: number, t
          {/* Status Bar */}
          <div className="w-full flex items-center gap-6 mt-8">
             <div className="flex flex-col">
-               <span className="font-mono text-[9px] text-white/20 uppercase tracking-[2px] mb-1">Status</span>
-               <span className="font-mono text-[10px] text-neon-green uppercase tracking-[3px] italic font-bold">
+               <span className="font-mono text-[11px] text-white/20 uppercase tracking-[2px] mb-2">Status</span>
+               <span className="font-mono text-[11px] md:text-[12px] text-neon-green uppercase tracking-[3px] italic font-bold">
                   Live Experience
                </span>
             </div>

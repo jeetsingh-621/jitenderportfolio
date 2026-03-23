@@ -1870,6 +1870,11 @@ body{
   --tw-shadow-colored: 0 0 40px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
+.shadow-\[0_0_15px_rgba\(0\2c 255\2c 136\2c 0\.1\)\]{
+  --tw-shadow: 0 0 15px rgba(0,255,136,0.1);
+  --tw-shadow-colored: 0 0 15px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .shadow-neon-blue{
   --tw-shadow-color: #00d4ff;
   --tw-shadow: var(--tw-shadow-colored);
@@ -2631,6 +2636,11 @@ body{
 
   .md\:text-\[9px\]{
     font-size: 9px;
+  }
+
+  .md\:text-3xl{
+    font-size: 1.875rem;
+    line-height: 2.25rem;
   }
 
   .md\:tracking-\[3px\]{

@@ -203,7 +203,7 @@ function SkillModule({
   const spotlightBackground = useTransform(
     [mouseX, mouseY],
     ([x, y]: any) =>
-      `radial-gradient(circle at ${(x + 0.5) * 100}% ${(y + 0.5) * 100}%, ${category.color}40 0%, transparent 70%)`
+      `radial-gradient(circle at ${(x + 0.5) * 100}% ${(y + 0.5) * 100}%, ${category.color}40 0%, transparent 70%)`,
   );
 
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
@@ -228,9 +228,10 @@ function SkillModule({
     <div
       className="relative"
       style={{ perspective: "1000px" }}
-      onMouseEnter={() => setActiveCategory(category.id)}
+      onMouseEnter={() => !isMobileSize && setActiveCategory(category.id)}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
+      onClick={() => isMobileSize && setActiveCategory(isActive ? null : category.id)}
     >
       {/* Module Base with 3D Tilt & Spotlight */}
       <motion.div
@@ -304,9 +305,24 @@ function SkillModule({
           <h3 className="font-display text-3xl text-white uppercase tracking-tight mb-2">
             {category.title}
           </h3>
-          <span className="font-mono text-[11px] md:text-[12px] tracking-[2px] text-white/20 uppercase group-hover:text-white/40 transition-colors">
-            {isActive ? "Module Deployed" : "Initialize Module"}
-          </span>
+          <div className="flex items-center justify-center gap-2">
+            {!isActive && isMobileSize ? (
+              <motion.div
+                animate={{ scale: [1, 1.05, 1], opacity: [0.7, 1, 0.7] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+                className="px-4 py-1.5 border border-neon-green/30 bg-neon-green/5 flex items-center gap-2 rounded-full shadow-[0_0_15px_rgba(0,255,136,0.1)]"
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-neon-green" />
+                <span className="font-mono text-[11px] tracking-[2px] text-neon-green uppercase font-bold">
+                  Tap to Deploy
+                </span>
+              </motion.div>
+            ) : (
+              <span className="font-mono text-[11px] md:text-[12px] tracking-[2px] text-white/20 uppercase group-hover:text-white/40 transition-colors">
+                {isActive ? "Module Deployed" : "Initialize Module"}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Animated Scanner */}
@@ -354,17 +370,33 @@ function SkillModule({
 
       <style jsx global>{`
         @keyframes border-flow-x {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
+          0% {
+            transform: translateX(-100%);
+          }
+          100% {
+            transform: translateX(100%);
+          }
         }
         @keyframes border-flow-y {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(100%); }
+          0% {
+            transform: translateY(-100%);
+          }
+          100% {
+            transform: translateY(100%);
+          }
         }
-        .animate-border-flow-x { animation: border-flow-x 2s infinite linear; }
-        .animate-border-flow-x-reverse { animation: border-flow-x 2s infinite linear reverse; }
-        .animate-border-flow-y { animation: border-flow-y 2s infinite linear; }
-        .animate-border-flow-y-reverse { animation: border-flow-y 2s infinite linear reverse; }
+        .animate-border-flow-x {
+          animation: border-flow-x 2s infinite linear;
+        }
+        .animate-border-flow-x-reverse {
+          animation: border-flow-x 2s infinite linear reverse;
+        }
+        .animate-border-flow-y {
+          animation: border-flow-y 2s infinite linear;
+        }
+        .animate-border-flow-y-reverse {
+          animation: border-flow-y 2s infinite linear reverse;
+        }
       `}</style>
     </div>
   );

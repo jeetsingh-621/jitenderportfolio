@@ -1,9 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import Lenis from "lenis";
-import Cursor from "@/components/ui/Cursor";
 import Marquee from "@/components/ui/Marquee";
-import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
 import About from "@/components/sections/About";
 import Skills from "@/components/sections/Skills";
@@ -50,13 +48,7 @@ export default function Home() {
       {/* Scanline animation */}
       <div className="scanline-bar" />
 
-      {/* Custom cursor */}
-      <Cursor />
-
-      {/* Navbar */}
-      <Navbar />
-
-      {/* Sections */}
+      {/* Global Navbar/Cursor are now in layout.tsx for absolute performance */}
       <Hero />
       <Marquee />
       <About />

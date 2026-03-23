@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navbar from "@/components/sections/Navbar";
+import Cursor from "@/components/ui/Cursor";
 
 export const metadata: Metadata = {
   title: "Jitender — Frontend Developer",
@@ -15,6 +17,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-dark text-white font-body antialiased">
+        {/* Global Components - Fixed at Root level for absolute stickiness */}
+        <Cursor />
+        <Navbar />
         {children}
       </body>
     </html>

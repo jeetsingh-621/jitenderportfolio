@@ -20,7 +20,6 @@ export default function Navbar() {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    // CRITICAL: Stop background scrolling when mobile menu is open
     if (menuOpen) {
       document.body.style.overflow = "hidden";
       document.documentElement.style.overflow = "hidden";
@@ -38,9 +37,13 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
+      <nav
         className={`fixed top-0 left-0 right-0 z-[99999] transition-all duration-300 font-body
-          bg-[#050505]/95 backdrop-blur-xl border-b border-white/5 py-3 md:py-4
+          ${
+            scrolled || isMobileSize
+              ? `bg-[#050505]/95 backdrop-blur-xl border-b border-white/5 py-3 md:py-4`
+              : "bg-transparent py-5 md:py-8"
+          }
         `}
       >
         <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
@@ -49,7 +52,7 @@ export default function Navbar() {
             href="#hero"
             className="group font-display text-xl md:text-2xl tracking-[0.2em] text-white relative z-50 focus:outline-none flex items-center gap-2"
           >
-            <span className="text-white group-hover:text-neon-green transition-colors duration-500">
+            <span className="text-white group-hover:text-neon-green transition-colors duration-500 uppercase">
               JITENDER
             </span>
             <span className="w-2 h-2 bg-neon-green rounded-full animate-pulse shadow-neon-green" />
@@ -72,7 +75,7 @@ export default function Navbar() {
               href="/Jitender_Resume.pdf"
               download="Jitender_Resume.pdf"
               target="_blank"
-              className="inline-flex items-center gap-2 px-6 py-2.5 font-mono text-[11px] tracking-[2px] uppercase text-dark bg-neon-green hover:bg-white transition-all duration-300 rounded-sm font-bold shadow-md hover:shadow-neon-green/30"
+              className="inline-flex items-center gap-2 px-6 py-2.5 font-mono text-[11px] tracking-[2px] uppercase text-dark bg-neon-green hover:bg-white transition-all duration-300 rounded-sm font-bold shadow-md hover:shadow-neon-green/30 px-6 py-2"
             >
               Resume <span className="text-xs">↗</span>
             </motion.a>
@@ -96,7 +99,7 @@ export default function Navbar() {
             </div>
           </button>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile Menu Overlay - Bold & Clean */}
       <AnimatePresence>

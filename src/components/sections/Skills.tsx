@@ -109,7 +109,7 @@ export default function Skills() {
     <section
       id="skills"
       ref={containerRef}
-      className="relative min-h-[100vh] py-24 bg-[#050505] overflow-hidden flex flex-col justify-center"
+      className="relative min-h-[100vh] py-16 bg-[#050505] overflow-hidden flex flex-col justify-center"
     >
       {/* Background Cyber-Matrix Effect */}
       <div className="absolute inset-0 z-0 pointer-events-none opacity-20">

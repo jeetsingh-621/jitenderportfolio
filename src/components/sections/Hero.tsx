@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { gsap } from "gsap";
 
@@ -18,6 +19,7 @@ export default function Hero() {
   const gridRef = useRef<HTMLDivElement>(null);
   const orb1Ref = useRef<HTMLDivElement>(null);
   const orb2Ref = useRef<HTMLDivElement>(null);
+  const isMobileSize = useIsMobile();
 
   // Mouse tilt for the portrait
   const mouseX = useMotionValue(0);
@@ -32,6 +34,7 @@ export default function Hero() {
   });
 
   function handleMouseMove(e: React.MouseEvent) {
+    if (isMobileSize) return;
     const { clientX, clientY } = e;
     const { innerWidth, innerHeight } = window;
     mouseX.set(clientX / innerWidth - 0.5);
@@ -90,7 +93,7 @@ export default function Hero() {
     }
 
     const onMouse = (e: MouseEvent) => {
-      if (!gridRef.current) return;
+      if (!gridRef.current || isMobileSize) return;
       const xPercent = (e.clientX / window.innerWidth - 0.5) * 20;
       const yPercent = (e.clientY / window.innerHeight - 0.5) * 20;
       gsap.to(gridRef.current, {
@@ -100,9 +103,11 @@ export default function Hero() {
         ease: "power2.out",
       });
     };
-    window.addEventListener("mousemove", onMouse);
+    if (!isMobileSize) {
+      window.addEventListener("mousemove", onMouse);
+    }
     return () => window.removeEventListener("mousemove", onMouse);
-  }, []);
+  }, [isMobileSize]);
 
   return (
     <section
@@ -124,7 +129,7 @@ export default function Hero() {
       {/* Neon orbs */}
       <div
         ref={orb1Ref}
-        className="absolute top-1/4 right-1/4 w-[400px] h-[400px] rounded-full pointer-events-none"
+        className="absolute top-1/4 right-1/4 w-[400px] h-[400px] rounded-full pointer-events-none neon-orb"
         style={{
           background:
             "radial-gradient(circle, rgba(0,255,136,0.08) 0%, transparent 70%)",
@@ -132,7 +137,7 @@ export default function Hero() {
       />
       <div
         ref={orb2Ref}
-        className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] rounded-full pointer-events-none"
+        className="absolute bottom-1/4 left-1/4 w-[300px] h-[300px] rounded-full pointer-events-none neon-orb"
         style={{
           background:
             "radial-gradient(circle, rgba(0,212,255,0.07) 0%, transparent 70%)",
@@ -299,8 +304,10 @@ export default function Hero() {
               }}
               className="relative w-full max-w-sm aspect-square group flex items-center justify-center p-4"
             >
-              {/* Background Glow */}
-              <div className="absolute inset-x-0 inset-y-10 bg-neon-green/20 blur-[120px] group-hover:opacity-40 transition-opacity duration-1000 -z-10" />
+              {/* Background Glow - Reduced blur on mobile */}
+              <div 
+                className={`absolute inset-x-0 inset-y-10 bg-neon-green/20 ${isMobileSize ? 'blur-[60px]' : 'blur-[120px]'} group-hover:opacity-40 transition-opacity duration-1000 -z-10`} 
+              />
 
               {/* 3D Animated HUD Components */}
               <div className="relative w-full h-full flex items-center justify-center pointer-events-none">

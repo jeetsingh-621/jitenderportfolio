@@ -4,10 +4,15 @@ import Lenis from 'lenis'
 
 export function useLenis() {
   useEffect(() => {
+    const isMobile = window.innerWidth < 1024
+    
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: isMobile ? 0.08 : 0.1,
       smoothWheel: true,
+      // @ts-ignore
+      touchMultiplier: 1.5,
     })
 
     function raf(time: number) {

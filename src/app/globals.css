@@ -5,19 +5,33 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    cursor: none;
-  }
-  @media (pointer: coarse) {
-    * {
-      cursor: auto !important;
-    }
-  }
   html {
     scroll-behavior: auto;
+    overflow-x: hidden;
   }
   body {
     @apply bg-dark text-white font-body overflow-x-hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* GPU acceleration for scroll */
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* Performance optimizations */
+  .animate-marquee,
+  .glitch-text,
+  .neon-orb,
+  .scanline-bar {
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  @media (max-width: 1024px) {
+    .backdrop-blur-2xl,
+    .backdrop-blur-3xl {
+      backdrop-filter: blur(12px) !important; /* Cap blur on mobile */
+    }
   }
   ::selection {
     background: rgba(0, 255, 136, 0.15);
@@ -75,21 +89,61 @@
   }
 
   @keyframes glitch1 {
-    0%, 85%, 100% { transform: translate(0); opacity: 0; }
-    86% { transform: translate(-4px, 1px); opacity: 1; }
-    88% { transform: translate(4px, -1px); opacity: 1; }
-    90% { transform: translate(-2px, 2px); opacity: 1; }
-    92% { transform: translate(2px, -2px); opacity: 1; }
-    94% { transform: translate(0); opacity: 0; }
+    0%,
+    85%,
+    100% {
+      transform: translate(0);
+      opacity: 0;
+    }
+    86% {
+      transform: translate(-4px, 1px);
+      opacity: 1;
+    }
+    88% {
+      transform: translate(4px, -1px);
+      opacity: 1;
+    }
+    90% {
+      transform: translate(-2px, 2px);
+      opacity: 1;
+    }
+    92% {
+      transform: translate(2px, -2px);
+      opacity: 1;
+    }
+    94% {
+      transform: translate(0);
+      opacity: 0;
+    }
   }
 
   @keyframes glitch2 {
-    0%, 88%, 100% { transform: translate(0); opacity: 0; }
-    89% { transform: translate(4px, -2px); opacity: 1; }
-    91% { transform: translate(-4px, 2px); opacity: 1; }
-    93% { transform: translate(2px, -1px); opacity: 1; }
-    95% { transform: translate(-2px, 1px); opacity: 1; }
-    97% { transform: translate(0); opacity: 0; }
+    0%,
+    88%,
+    100% {
+      transform: translate(0);
+      opacity: 0;
+    }
+    89% {
+      transform: translate(4px, -2px);
+      opacity: 1;
+    }
+    91% {
+      transform: translate(-4px, 2px);
+      opacity: 1;
+    }
+    93% {
+      transform: translate(2px, -1px);
+      opacity: 1;
+    }
+    95% {
+      transform: translate(-2px, 1px);
+      opacity: 1;
+    }
+    97% {
+      transform: translate(0);
+      opacity: 0;
+    }
   }
 
   /* Neon text glow */

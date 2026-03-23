@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
 import {
   motion,
   AnimatePresence,
@@ -97,6 +98,7 @@ const skillCategories = [
 export default function Skills() {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const containerRef = useRef<HTMLElement>(null);
+  const isMobileSize = useIsMobile();
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -124,7 +126,7 @@ export default function Skills() {
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10 w-full">
         {/* Cinematic Header */}
-        <div className="text-center mb-24 md:mb-32">
+        <div className="text-center mb-24">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -177,6 +179,7 @@ function SkillModule({
   activeCategory,
   setActiveCategory,
 }: any) {
+  const isMobileSize = useIsMobile();
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -194,7 +197,15 @@ function SkillModule({
     damping: 20,
   });
 
+  // Spotlight background animation value (Always called at top level)
+  const spotlightBackground = useTransform(
+    [mouseX, mouseY],
+    ([x, y]: any) =>
+      `radial-gradient(circle at ${(x + 0.5) * 100}% ${(y + 0.5) * 100}%, ${category.color}40 0%, transparent 70%)`,
+  );
+
   function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    if (isMobileSize) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -204,9 +215,6 @@ function SkillModule({
     // For Tilt
     mouseX.set(x / width - 0.5);
     mouseY.set(y / height - 0.5);
-
-    // For Spotlight (absolute pixels)
-    // Actually using 0-1 range for percentage in gradient might be easier
   }
 
   function handleMouseLeave() {
@@ -233,17 +241,15 @@ function SkillModule({
           ${activeCategory === category.id ? "border-white/20 scale-[1.02]" : ""}
         `}
       >
-        {/* Radial Spotlight Follower */}
-        <motion.div
-          className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-30 transition-opacity duration-500"
-          style={{
-            background: useTransform(
-              [mouseX, mouseY],
-              ([x, y]: any) =>
-                `radial-gradient(circle at ${(x + 0.5) * 100}% ${(y + 0.5) * 100}%, ${category.color}40 0%, transparent 70%)`,
-            ),
-          }}
-        />
+        {/* Radial Spotlight Follower - Disabled on Mobile for performance */}
+        {!isMobileSize && (
+          <motion.div
+            className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+            style={{
+              background: spotlightBackground,
+            }}
+          />
+        )}
 
         {/* Animated Border Beam */}
         <AnimatePresence>
